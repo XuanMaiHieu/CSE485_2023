@@ -163,4 +163,3 @@ VALUES (
 8, "2014/1/2"
 );
 
-SELECT * FROM tacgia
