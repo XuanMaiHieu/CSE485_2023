@@ -3,7 +3,7 @@
 SELECT ten_bhat from theloai,baiviet WHERE theloai.ma_tloai = baiviet.ma_tloai and ten_tloai = "Nhạc trữ tình"
 
 -- cau b
- SELECT ten_bhat FROM baiviet, tacgia WHERE baiviet.ma_tgia = tacgia.ma_tgia AND ten_tgia = 'Nhacvietplus'
+ SELECT ten_bhat FROM baiviet, tacgia WHERE baiviet.ma_tgia = tacgia.ma_tgia AND ten_tgia = 'Nhacvietplus';
  
 -- cau d
 SELECT ma_bviet, ten_bhat, ten_tgia, ten_tloai, ngayviet
@@ -102,7 +102,7 @@ IF (DELETED.[ma_tloai] IS NOT NULL)
 BEGIN
 
 UPDATE theloai
-SET SLBaiViet = SLBaiViet -	 1
+SET SLBaiViet = SLBaiViet - 1
 WHERE ma_tloai = DELETED.[ma_tloai];
 
 END;
@@ -112,9 +112,12 @@ END;
 -- cau l
 
 CREATE TABLE Users (
-		ma_user INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+		ma_user INT UNSIGNED PRIMARY KEY,
 		ten_user VARCHAR(200) NOT NULL,
 		ten_dnhap CHAR(20) NOT NULL,
-		mkhau INT NOT NULL,
-); 
+		mkhau INT NOT NULL
+);
+
+
+INSERT INTO Users (ma_user, ten_user, ten_dnhap, mkhau) VALUES (1,"admin ne", "admin",1);
 
