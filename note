@@ -15,3 +15,9 @@ try {
 }
 
 ?>
+// Include file kết nối cơ sở dữ liệu sử dụng trong các file để gọi database
+<?php
+
+include 'path/to/db_connection.php';
+
+?>
