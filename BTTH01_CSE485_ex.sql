@@ -37,4 +37,5 @@ CREATE TABLE Users (
 		ten_user VARCHAR(200) NOT NULL,
 		ten_dnhap CHAR(20) NOT NULL,
 		mkhau INT NOT NULL,
-);
+); 
+
