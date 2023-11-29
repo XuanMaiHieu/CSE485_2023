@@ -1,3 +1,7 @@
+<?php
+include 'CSE485_2023/db_connect.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,0 +1,17 @@
+tạo file db_connect.php tại thư mục CSE485_2023
+
+<?php
+$host = 'localhost';
+$db = 'BTTH01_CSE485';
+$user = 'root';
+$pass = '123'; // thay doi neu khac
+$charset = 'utf8mb4';
+$dsn = "mysql:host=$host;dbname=$db";
+
+try {
+    $pdo = new PDO($dsn, $user, $pass);
+} catch (\PDOException $e) {
+    echo $e->getMessage();
+}
+
+?>
