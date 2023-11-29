@@ -1,3 +1,28 @@
+<?php
+    global $pdo;
+    include '../../db_connect.php';
+
+    $sql1 = "SELECT COUNT(ma_user) FROM Users";
+    $a = $pdo->prepare($sql1);
+    $a->execute();
+    $user = $a->fetchColumn(); 
+
+    $sql2 = "SELECT COUNT(ma_tloai) FROM theloai";
+    $b = $pdo->prepare($sql2);
+    $b->execute();
+    $theloai = $b->fetchColumn();
+
+    $sql3 = "SELECT COUNT(ma_tgia) FROM tacgia";
+    $c = $pdo->prepare($sql3);
+    $c->execute();
+    $tacgia = $c->fetchColumn();
+
+    $sql4 = "SELECT COUNT(ma_bviet) FROM baiviet";
+    $d = $pdo->prepare($sql4);
+    $d->execute();
+    $baiviet = $d->fetchColumn();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,7 +78,11 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                            110
+                            <?php 
+                                echo "<pre>";
+                                print_r($user);
+                                echo "</pre>";
+                            ?>
                         </h5>
                     </div>
                 </div>
@@ -67,7 +96,9 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                            10
+                            <?php echo "<pre>";
+                                print_r($theloai);
+                                echo "</pre>"; ?>
                         </h5>
                     </div>
                 </div>
@@ -81,7 +112,9 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                            20
+                            <?php echo "<pre>";
+                                print_r($tacgia);
+                                echo "</pre>"; ?>
                         </h5>
                     </div>
                 </div>
@@ -95,7 +128,9 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                            110
+                            <?php echo "<pre>";
+                                print_r($baiviet);
+                                echo "</pre>"; ?>
                         </h5>
                     </div>
                 </div>
