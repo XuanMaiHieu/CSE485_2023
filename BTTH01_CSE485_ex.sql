@@ -1,5 +1,3 @@
--- tao bang users
-
 
 -- cau a
 SELECT ten_bhat from theloai,baiviet WHERE theloai.ma_tloai = baiviet.ma_tloai and ten_tloai = "Nhạc trữ tình"
