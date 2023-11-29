@@ -1,6 +1,7 @@
 tạo file db_connect.php tại thư mục CSE485_2023
 
 <?php
+global $pdo;
 $host = 'localhost';
 $db = 'BTTH01_CSE485';
 $user = 'root';
@@ -15,9 +16,11 @@ try {
 }
 
 ?>
+
+
 // Include file kết nối cơ sở dữ liệu sử dụng trong các file để gọi database
 <?php
-
-include 'path/to/db_connection.php';
+global $pdo;
+include '../db_connect.php'; // '../../db_connect.php' duong dan den file db_connect.php tu folder can su dung
 
 ?>
