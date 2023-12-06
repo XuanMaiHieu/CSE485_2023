@@ -1,3 +1,14 @@
+<?php
+    global $pdo;
+    include '../../db_connect.php';
+
+    // Lấy danh sách các bài viết từ CSDL
+    $query = "SELECT tieude, ten_bhat, ma_tloai, ngayviet FROM baiviet"; 
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,13 +20,46 @@
     <title>Thêm bài viết</title>
 </head>
 <body>
-<div class="row" style="padding-top: 10px">
+<header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
+            <div class="container-fluid">
+                <div class="h3">
+                    <a class="navbar-brand" href="#">Administration</a>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="./">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.php">Trang ngoài</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="category.php">Thể loại</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active fw-bold" href="author.php">Tác giả</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="article.php">Bài viết</a>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <main class="container mt-5 mb-5">
+        <div class="row">
             <div class="col-sm" >
                 <a href="add_article.php" class="btn btn-success">Thêm mới</a>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Số thứ tự</th>
                             <th scope="col">Tiêu đề</th>
                             <th scope="col">Mã thể loại</th>
                             <th scope="col">Tên bài hát</th>
@@ -25,12 +69,30 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach ($articles as $index => $articles) : ?>
+
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Quê hương</td>
-                            <td>3</td>
-                            <td>Quê tôi</td>
-                            <td>1/1/2008</td>
+                            <th scope="row"><?php echo $index + 1; ?></th>
+                            <td>
+                                <?php 
+                                    echo $articles['tieude'];
+                                ?>
+                            </td>
+                            <td>
+                                <?php 
+                                    echo $articles['ma_tloai'];
+                                ?>
+                            </td>
+                            <td>
+                                <?php                                     
+                                    echo $articles['ten_bhat'];
+                                ?>
+                            </td>
+                            <td>
+                                <?php 
+                                    echo $articles['ngayviet'];
+                                ?>
+                            </td>
                             <td>
                                 <a href="edit_article.php"><i class="fa-solid fa-pen-to-square"></i></a>
                             </td>
@@ -38,37 +100,12 @@
                                 <a href=""><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Mưa</td>
-                            <td>2</td>
-                            <td>Mưa tháng sáu</td>
-                            <td>7/8/2020</td>
-                            <td>
-                                <a href="edit_article.php"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Giai đình</td>
-                            <td>4</td>
-                            <td>Đến giờ cơm</td>
-                            <td>5/7/2020</td>
-                            <td>
-                                <a href="edit_article.php"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                       
+                        <?php endforeach; ?> 
                     </tbody>
                 </table>
             </div>
         </div>
+    </main>
     <footer class="bg-white d-flex justify-content-center align-items-center border-top border-secondary  border-2" style="height:80px">
         <h4 class="text-center text-uppercase fw-bold">TLU's music garden</h4>
     </footer>

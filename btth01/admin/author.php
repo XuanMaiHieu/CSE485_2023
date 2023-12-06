@@ -1,3 +1,14 @@
+<?php
+    global $pdo;
+    include '../../db_connect.php';
+
+    // Lấy danh sách các tác giả từ CSDL
+    $query = "SELECT ma_tgia, ten_tgia FROM tacgia";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    $authors = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,34 +61,32 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Số thứ tự</th>
                             <th scope="col">Tên tác giả</th>
                             <th>Sửa</th>
                             <th>Xóa</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach ($authors as $index => $author) : ?>
+
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Ưng Hoàng Phúc</td>
+                            <th scope="row"><?php echo $index + 1; ?></th>
+                            <td> 
+                                <?php 
+                                    echo $author['ten_tgia'];
+                                ?>
+                            </td>
                             <td>
                                 <a href="edit_author.php?id=1"><i class="fa-solid fa-pen-to-square"></i></a>
                             </td>
                             <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
+                                <a href="process_delete_author.php?id=<?php echo $author['ma_tgia']; ?>">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Bằng Kiều</td>
-                            <td>
-                                <a href="edit_author.php?id=2"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                       
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

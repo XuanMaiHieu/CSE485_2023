@@ -1,3 +1,13 @@
+<?php
+    global $pdo;
+    include '../../db_connect.php';
+
+    // Lấy danh sách các tác giả từ CSDL
+    $query = "SELECT ma_tloai, ten_tloai FROM theloai";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    $categorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,16 +60,21 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Số thứ tự</th>
                             <th scope="col">Tên thể loại</th>
                             <th>Sửa</th>
                             <th>Xóa</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach ($categorys as $index => $categorys) : ?>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Nhạc trữ tình</td>
+                            <th scope="row"><?php echo $index + 1; ?></th>
+                            <td>
+                                <?php 
+                                    echo $categorys ['ten_tloai'];
+                                ?>
+                            </td>
                             <td>
                                 <a href="edit_category.php?id=1"><i class="fa-solid fa-pen-to-square"></i></a>
                             </td>
@@ -67,16 +82,7 @@
                                 <a href=""><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Nhạc cách mạng</td>
-                            <td>
-                                <a href="edit_category.php?id=2"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
+                        <?php endforeach; ?>
                        
                     </tbody>
                 </table>
